@@ -78,6 +78,16 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/privacy" className="hover:text-gold">
+                Privacy
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms" className="hover:text-gold">
+                Terms
+              </Link>
+            </li>
+            <li>
               <Link href="/accessibility" className="hover:text-gold">
                 Accessibility
               </Link>
@@ -97,12 +107,12 @@ export default function Footer() {
           <span>
             Website by{' '}
             <a
-              href="https://adamloomis.online"
+              href="https://adamloomismarketing.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-on-surface-variant transition-colors hover:text-gold"
             >
-              AdamLoomis.online
+              Adam Loomis Marketing
             </a>
           </span>
         </div>

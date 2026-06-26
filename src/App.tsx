@@ -11,6 +11,8 @@ import Home from './pages/Home'
 import Humidor from './pages/Humidor'
 import Contact from './pages/Contact'
 import Accessibility from './pages/Accessibility'
+import Privacy from './pages/Privacy'
+import Terms from './pages/Terms'
 import NotFound from './pages/NotFound'
 
 function Shell() {
@@ -34,6 +36,8 @@ function Shell() {
           <Route path="/humidor" component={Humidor} />
           <Route path="/contact" component={Contact} />
           <Route path="/accessibility" component={Accessibility} />
+          <Route path="/privacy" component={Privacy} />
+          <Route path="/terms" component={Terms} />
           <Route component={NotFound} />
         </Switch>
       </main>
