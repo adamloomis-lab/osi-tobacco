@@ -10,6 +10,7 @@ import { useParallax } from './hooks/useParallax'
 import Home from './pages/Home'
 import Humidor from './pages/Humidor'
 import Contact from './pages/Contact'
+import Accessibility from './pages/Accessibility'
 import NotFound from './pages/NotFound'
 
 function Shell() {
@@ -32,6 +33,7 @@ function Shell() {
           <Route path="/" component={Home} />
           <Route path="/humidor" component={Humidor} />
           <Route path="/contact" component={Contact} />
+          <Route path="/accessibility" component={Accessibility} />
           <Route component={NotFound} />
         </Switch>
       </main>
