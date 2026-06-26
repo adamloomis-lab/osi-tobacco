@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import AgeGate from './components/AgeGate'
 import MobileActionBar from './components/MobileActionBar'
+import CookieBanner from './components/CookieBanner'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import { useParallax } from './hooks/useParallax'
 import Home from './pages/Home'
@@ -45,6 +46,7 @@ function Shell() {
       <div className="h-16 lg:hidden" aria-hidden="true" />
       <MobileActionBar />
       <AgeGate />
+      <CookieBanner />
     </>
   )
 }
