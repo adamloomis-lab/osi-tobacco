@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'wouter'
-import { Menu, X, Phone } from 'lucide-react'
+import { Menu, Phone } from 'lucide-react'
 import Logo from './Logo'
+import MobileMenu from './MobileMenu'
 import { company } from '../data/site'
 import { useScrolled } from '../hooks/useScrolled'
 
@@ -63,45 +64,22 @@ export default function Navbar() {
 
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen(true)}
           className="text-cream lg:hidden"
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-label="Open menu"
           aria-expanded={open}
+          aria-haspopup="dialog"
         >
-          {open ? <X size={28} /> : <Menu size={28} />}
+          <Menu size={28} />
         </button>
       </nav>
 
-      {open && (
-        <div className="border-t border-outline-variant bg-background lg:hidden">
-          <div className="container-x flex flex-col gap-1 py-5">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded px-2 py-3 font-body text-sm font-medium uppercase tracking-[0.16em] text-cream hover:bg-surface-container"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <a
-              href={company.phoneHref}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded border border-gold/50 px-5 py-3 font-body text-sm font-medium uppercase tracking-[0.14em] text-gold"
-            >
-              <Phone size={17} /> {company.phone}
-            </a>
-            <a
-              href={company.mapsDir}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded bg-gold px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.14em] text-on-gold"
-            >
-              Visit Us
-            </a>
-          </div>
-        </div>
-      )}
+      <MobileMenu
+        open={open}
+        onClose={() => setOpen(false)}
+        links={links}
+        location={location}
+      />
     </header>
   )
 }

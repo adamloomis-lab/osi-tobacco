@@ -1,39 +1,81 @@
 import { useState } from 'react'
-import type { FormEvent } from 'react'
-import { MapPin, Phone, Clock, Facebook, Instagram, Check } from 'lucide-react'
+import type { ChangeEvent, FormEvent } from 'react'
+import {
+  MapPin,
+  Phone,
+  Clock,
+  Facebook,
+  Instagram,
+  Send,
+  ArrowRight,
+  Loader2,
+  HelpCircle,
+  Cigarette,
+  Sofa,
+  CalendarDays,
+  Gift,
+  MessageCircle,
+  type LucideIcon,
+} from 'lucide-react'
 import { company } from '../data/site'
 import HoursList from '../components/HoursList'
+import { FloatField, SuccessCheck } from '../components/FluidField'
 
 const encode = (data: Record<string, string>) =>
   Object.keys(data)
     .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`)
     .join('&')
 
+// Single-select icon cards. The submitted `value` is what lands in the Netlify
+// submission under `subject`; literal lucide icons only, no AI-cliche glyphs.
+const SUBJECT_OPTIONS: { value: string; label: string; icon: LucideIcon }[] = [
+  { value: 'General Question', label: 'General question', icon: HelpCircle },
+  { value: 'Cigar Recommendation', label: 'Cigar advice', icon: Cigarette },
+  { value: 'Lounge Visit', label: 'Lounge visit', icon: Sofa },
+  { value: 'Private Event', label: 'Private event', icon: CalendarDays },
+  { value: 'Gifts & Special Orders', label: 'Gifts & orders', icon: Gift },
+  { value: 'Other', label: 'Something else', icon: MessageCircle },
+]
+
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    subject: '',
+    message: '',
+  })
   const [sent, setSent] = useState(false)
+  const [sentName, setSentName] = useState('')
+  const [sending, setSending] = useState(false)
   const [error, setError] = useState(false)
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError(false)
-    const form = e.currentTarget
-    const data = Object.fromEntries(new FormData(form) as never) as Record<string, string>
+    setSending(true)
     try {
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({ 'form-name': 'contact', ...data }),
+        body: encode({ 'form-name': 'contact', ...formData }),
       })
       if (!res.ok) throw new Error()
+      setSentName(formData.name.trim().split(' ')[0])
       setSent(true)
-      form.reset()
+      setFormData({ name: '', phone: '', email: '', subject: '', message: '' })
     } catch {
       setError(true)
+    } finally {
+      setSending(false)
     }
   }
-
-  const field =
-    'w-full rounded border border-outline bg-surface px-4 py-3.5 text-body-md text-cream placeholder:text-muted focus-visible:border-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold/40'
 
   return (
     <>
@@ -124,14 +166,43 @@ export default function Contact() {
               <h2 className="mt-4 font-display text-headline-md text-cream">Get in Touch</h2>
 
               {sent ? (
-                <div className="mt-8 flex flex-col items-center gap-4 rounded-lg border border-gold/40 bg-gold/5 px-6 py-12 text-center">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gold text-on-gold">
-                    <Check size={28} />
+                <div
+                  className="mt-8 flex flex-col items-center gap-4 rounded-lg border border-gold/40 bg-gold/5 px-6 py-12 text-center"
+                  style={{ animation: 'osi-pop 0.55s cubic-bezier(0.16,1,0.3,1) both' }}
+                >
+                  <span
+                    className="flex items-center justify-center"
+                    style={{ animation: 'osi-pop 0.5s 0.05s cubic-bezier(0.34,1.56,0.64,1) both' }}
+                  >
+                    <SuccessCheck />
                   </span>
-                  <p className="font-display text-headline-sm text-cream">Thank you!</p>
-                  <p className="text-body-md text-on-surface-variant">
-                    Thank you for contacting us. We’ll get back to you as soon as possible.
+                  <p className="font-display text-headline-sm text-cream">
+                    {sentName ? `Thank You, ${sentName}!` : 'Thank You!'}
                   </p>
+                  <p className="max-w-sm text-body-md text-on-surface-variant">
+                    Your message is on its way to OSI Tobacco. We’ll get back to you as soon as we
+                    can. Want an answer right now? Give us a call and we’ll help you today.
+                  </p>
+                  <a
+                    href={company.phoneHref}
+                    className="group relative mt-2 inline-flex items-center gap-2 overflow-hidden rounded bg-gold px-7 py-3.5 font-body text-[13px] font-semibold uppercase tracking-[0.16em] text-on-gold transition-colors hover:bg-gold-light"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="sheen pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-white/30 blur-md"
+                    />
+                    <Phone size={16} /> {company.phone}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSent(false)
+                      setSentName('')
+                    }}
+                    className="mt-1 font-body text-[12px] uppercase tracking-[0.14em] text-muted transition-colors hover:text-gold"
+                  >
+                    Send another message
+                  </button>
                 </div>
               ) : (
                 <form
@@ -140,46 +211,122 @@ export default function Contact() {
                   data-netlify="true"
                   netlify-honeypot="bot-field"
                   onSubmit={onSubmit}
-                  className="mt-7 space-y-4"
+                  className="mt-7 space-y-5"
                 >
                   <input type="hidden" name="form-name" value="contact" />
+                  {/* Mirrors the icon-card selection into the Netlify payload. */}
+                  <input type="hidden" name="subject" value={formData.subject} />
                   <p className="hidden">
                     <label>
                       Don’t fill this out: <input name="bot-field" />
                     </label>
                   </p>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="name" className="sr-only">Name</label>
-                      <input className={field} id="name" type="text" name="name" placeholder="Name" required />
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="sr-only">Phone</label>
-                      <input className={field} id="phone" type="tel" name="phone" placeholder="Phone" />
-                    </div>
+
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <FloatField
+                      name="name"
+                      label="Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      autoComplete="name"
+                    />
+                    <FloatField
+                      name="phone"
+                      label="Phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      autoComplete="tel"
+                    />
                   </div>
-                  <label htmlFor="email" className="sr-only">Email</label>
-                  <input className={field} id="email" type="email" name="email" placeholder="Email" required />
-                  <label htmlFor="message" className="sr-only">Message</label>
-                  <textarea
-                    className={field}
-                    id="message"
-                    name="message"
-                    rows={5}
-                    placeholder="How can we help?"
+                  <FloatField
+                    name="email"
+                    label="Email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     required
+                    autoComplete="email"
                   />
+
+                  {/* Subject as single-select icon cards (value submits via hidden input). */}
+                  <fieldset>
+                    <legend className="mb-3 block font-body text-[11px] font-medium uppercase tracking-[0.18em] text-on-surface-variant">
+                      What can we help with?
+                    </legend>
+                    <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+                      {SUBJECT_OPTIONS.map((o) => {
+                        const active = formData.subject === o.value
+                        const Icon = o.icon
+                        return (
+                          <button
+                            key={o.value}
+                            type="button"
+                            aria-pressed={active}
+                            onClick={() =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                subject: active ? '' : o.value,
+                              }))
+                            }
+                            className={`flex flex-col items-start gap-2 rounded border px-3.5 py-3.5 text-left font-body text-body-md transition-all duration-200 active:scale-[0.98] ${
+                              active
+                                ? 'border-gold bg-gold text-on-gold shadow-[0_10px_24px_-12px_rgba(198,160,73,0.7)]'
+                                : 'border-outline bg-surface text-on-surface hover:border-gold hover:bg-surface-dim'
+                            }`}
+                          >
+                            <Icon
+                              size={22}
+                              strokeWidth={1.75}
+                              className={active ? 'text-on-gold' : 'text-gold'}
+                            />
+                            <span className="text-[14px] font-medium leading-tight">{o.label}</span>
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </fieldset>
+
+                  <FloatField
+                    name="message"
+                    label="How can we help?"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    textarea
+                    rows={5}
+                  />
+
                   {error && (
                     <p className="text-body-md text-error">
                       Oops, there was an error sending your message. Please try again later, or call{' '}
                       {company.phone}.
                     </p>
                   )}
+
                   <button
                     type="submit"
-                    className="w-full rounded bg-gold px-8 py-4 font-body text-[13px] font-semibold uppercase tracking-[0.16em] text-on-gold transition-colors hover:bg-gold-light"
+                    disabled={sending}
+                    className="group relative flex w-full items-center justify-center gap-2.5 overflow-hidden rounded bg-gold px-8 py-4 font-body text-[13px] font-semibold uppercase tracking-[0.16em] text-on-gold transition-colors hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-70"
                   >
-                    Send Message
+                    <span
+                      aria-hidden="true"
+                      className="sheen pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-white/30 blur-md"
+                    />
+                    {sending ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" /> Sending
+                      </>
+                    ) : (
+                      <>
+                        <Send size={14} /> Send Message{' '}
+                        <ArrowRight
+                          size={15}
+                          className="transition-transform duration-300 group-hover:translate-x-1"
+                        />
+                      </>
+                    )}
                   </button>
                 </form>
               )}

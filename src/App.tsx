@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import AgeGate from './components/AgeGate'
 import MobileActionBar from './components/MobileActionBar'
+import StickyVisit from './components/StickyVisit'
 import CookieBanner from './components/CookieBanner'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import { useParallax } from './hooks/useParallax'
@@ -43,8 +44,9 @@ function Shell() {
         </Switch>
       </main>
       <Footer />
-      <div className="h-16 lg:hidden" aria-hidden="true" />
+      <div className="h-20 lg:hidden" aria-hidden="true" />
       <MobileActionBar />
+      <StickyVisit />
       <AgeGate />
       <CookieBanner />
     </>
