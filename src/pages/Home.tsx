@@ -50,7 +50,7 @@ export default function Home() {
             The Largest Selection of Premium Cigars in Ohio
           </h1>
           <p className="rise rise-3 mx-auto mt-6 max-w-2xl text-body-lg text-on-surface">
-            Step into the largest walk-in humidor in the Midwest — over 2,600 facings of the world’s
+            Step into the largest walk-in humidor in the Midwest, with over 2,600 facings of the world’s
             finest cigars, kept at a flawless 70/70 and waiting in our Diamond Crown lounge.
           </p>
           <div className="rise rise-4 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -119,7 +119,7 @@ export default function Home() {
             </p>
             <p className="mt-4 text-body-lg text-on-surface-variant">
               We carry Opus X, Diamond Crown, Padrón, Alphonso, Byron, Perdomo Limited Brands and
-              Meerapfel blends — making us Stark County’s premier premium cigar retailer and lounge.
+              Meerapfel blends, making us Stark County’s premier premium cigar retailer and lounge.
             </p>
             <ul className="check-list mt-7 space-y-3 text-body-md text-cream">
               {distinctions.map((d) => (
@@ -136,7 +136,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Curated Excellence"
             title="The World’s Finest Houses, Under One Roof"
-            intro="From rare allocations to everyday legends — including the only Davidoff Appointed Merchant in Stark County."
+            intro="From rare allocations to everyday legends, including the only Davidoff Appointed Merchant in Stark County."
           />
 
           <div className="mt-16 grid gap-6 reveal-group md:grid-cols-3">

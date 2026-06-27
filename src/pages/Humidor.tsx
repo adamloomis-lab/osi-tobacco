@@ -26,7 +26,7 @@ export default function Humidor() {
             The Humidor
           </h1>
           <p className="rise rise-3 mx-auto mt-6 max-w-2xl text-body-lg text-on-surface">
-            The largest walk-in cigar humidor in the Midwest — over 2,600 facings, held at a steady
+            The largest walk-in cigar humidor in the Midwest, with over 2,600 facings, held at a steady
             70°F and 70% humidity. Shop our amazing selection today.
           </p>
         </div>
@@ -108,7 +108,7 @@ export default function Humidor() {
             ))}
           </div>
           <p className="mx-auto mt-10 max-w-2xl text-body-md text-on-surface-variant">
-            Plus the full range from {brands.slice(0, 8).join(', ')} and many more — over 2,600
+            Plus the full range from {brands.slice(0, 8).join(', ')} and many more, over 2,600
             facings in all.
           </p>
           <div className="mt-10">

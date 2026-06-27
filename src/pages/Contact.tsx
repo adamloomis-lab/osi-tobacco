@@ -52,7 +52,7 @@ export default function Contact() {
             Visit &amp; Contact
           </h1>
           <p className="rise rise-3 mx-auto mt-6 max-w-2xl text-body-lg text-on-surface">
-            Find us in Canton, Ohio. Stop in to browse the humidor and relax in the lounge — or
+            Find us in Canton, Ohio. Stop in to browse the humidor and relax in the lounge, or
             reach out with a question and we’ll get right back to you.
           </p>
         </div>

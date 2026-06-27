@@ -127,9 +127,9 @@ export function getPageMeta(rawPath: string): PageMeta {
       }
     case '/humidor':
       return {
-        title: 'The Humidor | Premium Cigar Collection — OSI Tobacco, Canton OH',
+        title: 'The Humidor | Premium Cigar Collection, OSI Tobacco, Canton OH',
         description:
-          'Step inside the largest walk-in humidor in the Midwest — over 2,600 facings from Davidoff, Arturo Fuente, Padrón, Oliva, Liga Privada and more, held at a steady 70/70.',
+          'Step inside the largest walk-in humidor in the Midwest, over 2,600 facings from Davidoff, Arturo Fuente, Padrón, Oliva, Liga Privada and more, held at a steady 70/70.',
         canonical: pageUrl('/humidor'),
         ogImage: abs('/images/humidor-1.webp'),
         jsonLd: [

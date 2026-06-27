@@ -13,7 +13,7 @@ export default function Logo({
 }) {
   if (variant === 'stacked') {
     return (
-      <Link href="/" aria-label="OSI Tobacco — home" className={`inline-flex ${className}`}>
+      <Link href="/" aria-label="OSI Tobacco, home" className={`inline-flex ${className}`}>
         <img
           src="/images/osi-logo-dark.png"
           alt="OSI Tobacco"
@@ -28,7 +28,7 @@ export default function Logo({
   return (
     <Link
       href="/"
-      aria-label="OSI Tobacco — home"
+      aria-label="OSI Tobacco, home"
       className={`group inline-flex items-center gap-3 ${className}`}
     >
       <img

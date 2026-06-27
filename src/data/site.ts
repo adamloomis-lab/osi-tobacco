@@ -2,7 +2,7 @@ export const company = {
   name: 'OSI Tobacco',
   tagline: 'Largest Selection of Premium Cigars in Ohio',
   shortBlurb:
-    "Stark County's premier walk-in cigar humidor and Diamond Crown lounge — over 2,600 facings from the world's finest brands.",
+    "Stark County's premier walk-in cigar humidor and Diamond Crown lounge, with over 2,600 facings from the world's finest brands.",
   phone: '(234) 214-0868',
   phoneHref: 'tel:+12342140868',
   textHref: 'sms:+12342140868',
@@ -25,20 +25,20 @@ export const company = {
 } as const
 
 export const hours = [
-  { day: 'Monday', short: 'Mon', dow: 1, time: '11:00 am – 10:00 pm' },
-  { day: 'Tuesday', short: 'Tue', dow: 2, time: '11:00 am – 10:00 pm' },
-  { day: 'Wednesday', short: 'Wed', dow: 3, time: '11:00 am – 10:00 pm' },
-  { day: 'Thursday', short: 'Thu', dow: 4, time: '11:00 am – 10:00 pm' },
-  { day: 'Friday', short: 'Fri', dow: 5, time: '11:00 am – 11:30 pm' },
-  { day: 'Saturday', short: 'Sat', dow: 6, time: '11:00 am – 11:30 pm' },
-  { day: 'Sunday', short: 'Sun', dow: 0, time: '12:00 pm – 6:00 pm' },
+  { day: 'Monday', short: 'Mon', dow: 1, time: '11:00 am - 10:00 pm' },
+  { day: 'Tuesday', short: 'Tue', dow: 2, time: '11:00 am - 10:00 pm' },
+  { day: 'Wednesday', short: 'Wed', dow: 3, time: '11:00 am - 10:00 pm' },
+  { day: 'Thursday', short: 'Thu', dow: 4, time: '11:00 am - 10:00 pm' },
+  { day: 'Friday', short: 'Fri', dow: 5, time: '11:00 am - 11:30 pm' },
+  { day: 'Saturday', short: 'Sat', dow: 6, time: '11:00 am - 11:30 pm' },
+  { day: 'Sunday', short: 'Sun', dow: 0, time: '12:00 pm - 6:00 pm' },
 ]
 
 // Condensed hours for compact displays (footer / hero)
 export const hoursCompact = [
-  { day: 'Mon – Thu', time: '11:00 am – 10:00 pm' },
-  { day: 'Fri – Sat', time: '11:00 am – 11:30 pm' },
-  { day: 'Sunday', time: '12:00 pm – 6:00 pm' },
+  { day: 'Mon - Thu', time: '11:00 am - 10:00 pm' },
+  { day: 'Fri - Sat', time: '11:00 am - 11:30 pm' },
+  { day: 'Sunday', time: '12:00 pm - 6:00 pm' },
 ]
 
 // Schema.org openingHoursSpecification
@@ -88,7 +88,7 @@ export const exclusives = [
 export const featuredBrands = [
   {
     name: 'Davidoff',
-    note: 'The only Davidoff Appointed Merchant in Stark County — including the full Davidoff and Diamond Crown lines.',
+    note: 'The only Davidoff Appointed Merchant in Stark County, including the full Davidoff and Diamond Crown lines.',
   },
   {
     name: 'Arturo Fuente',
@@ -96,7 +96,7 @@ export const featuredBrands = [
   },
   {
     name: 'Padrón',
-    note: 'Box-pressed Nicaraguan craftsmanship — Anniversary 1964, 1926 and Family Reserve.',
+    note: 'Box-pressed Nicaraguan craftsmanship. Anniversary 1964, 1926 and Family Reserve.',
   },
 ]
 
@@ -109,7 +109,7 @@ export const agingPillars = [
   {
     title: 'Curated Selection',
     blurb:
-      'Over 2,600 facings — boutique limited runs alongside the icons — hand-picked by people who actually smoke them.',
+      'Over 2,600 facings, boutique limited runs alongside the icons, hand-picked by people who actually smoke them.',
   },
   {
     title: 'Properly Aged',
